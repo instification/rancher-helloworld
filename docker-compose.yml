@@ -1,0 +1,16 @@
+version: '2'
+services:
+  hello-service:
+    image: crccheck/hello-world
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  weblb:
+    image: rancher/lb-service-haproxy:v0.7.6
+    ports:
+    - 80:80/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
